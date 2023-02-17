@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@buf/bneiconseil_iw4-ninja.grpc_node': 1.12.4-20230217110537-58587cb6bc64.1
   '@elastic/ecs-winston-format': ^1.3.1
   '@grpc/grpc-js': ^1.8.9
   '@grpc/proto-loader': ^0.7.5
@@ -44,7 +43,6 @@ specifiers:
   winston: ^3.8.2
 
 dependencies:
-  '@buf/bneiconseil_iw4-ninja.grpc_node': 1.12.4-20230217110537-58587cb6bc64.1_hvbidvmankismscnn6fxnr75ha
   '@elastic/ecs-winston-format': 1.3.1
   '@grpc/grpc-js': 1.8.9
   '@grpc/proto-loader': 0.7.5
@@ -533,16 +531,6 @@ packages:
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
-
-  /@buf/bneiconseil_iw4-ninja.grpc_node/1.12.4-20230217110537-58587cb6bc64.1_hvbidvmankismscnn6fxnr75ha:
-    resolution: {registry: https://buf.build/gen/npm/v1, tarball: https://buf.build/gen/npm/v1/@buf/bneiconseil_iw4-ninja.grpc_node/1.12.4-20230217110537-58587cb6bc64.1/tarball}
-    peerDependencies:
-      '@grpc/grpc-js': ^1.8.0
-      google-protobuf: ^3.21.2
-    dependencies:
-      '@grpc/grpc-js': 1.8.9
-      google-protobuf: 3.21.2
-    dev: false
 
   /@colors/colors/1.5.0:
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
