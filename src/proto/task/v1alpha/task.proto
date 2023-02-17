@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package task.v1alpha;
+
+message Task {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  string due_date = 4;
+  Status status = 5;
+}
+
+enum Status {
+  STATUS_TODO = 0;
+  STATUS_DOING = 1;
+  STATUS_DONE = 2;
+}
+
+// Generated according to https://cloud.google.com/apis/design/standard_methods
+service TaskService {
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {}
+
+  rpc GetTask(GetTaskRequest) returns (Task) {}
+
+  rpc CreateTask(CreateTaskRequest) returns (Task) {}
+
+  rpc UpdateTask(UpdateTaskRequest) returns (Task) {}
+
+  rpc DeleteTask(DeleteTaskRequest) returns (Task) {}
+}
+
+// message Task {
+// ! This should be defined elsewere
+// }
+
+message ListTasksRequest {
+  // The parent resource name, for example, "shelves/shelf1"
+  string parent = 1;
+
+  // The maximum number of items to return.
+  int32 page_size = 2;
+
+  // The next_page_token value returned from a previous List request, if any.
+  string page_token = 3;
+}
+
+message ListTasksResponse {
+  // The field name should match the noun "Task" in the method name.
+  // There will be a maximum number of items returned based on the page_size field in the request.
+  repeated Task Tasks = 1;
+
+  // Token to retrieve the next page of results, or empty if there are no more results in the list.
+  string next_page_token = 2;
+}
+
+message GetTaskRequest {
+  // The field will contain name of the resource requested.
+  string name = 1;
+}
+
+message CreateTaskRequest {
+  // The parent resource name where the Task is to be created.
+  string parent = 1;
+
+  // The Task id to use for this Task.
+  string Task_id = 2;
+
+  // The Task resource to create.
+  // The field name should match the Noun in the method name.
+  Task Task = 3;
+}
+
+message UpdateTaskRequest {
+  // The Task resource which replaces the resource on the server.
+  Task Task = 1;
+
+  // The update mask applies to the resource. For the `FieldMask` definition,
+  // see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+  // FieldMask update_mask = 2;
+}
+
+message DeleteTaskRequest {
+  // The resource name of the Task to be deleted.
+  string name = 1;
+}

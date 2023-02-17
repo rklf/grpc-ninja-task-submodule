@@ -1,41 +1,16 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  Patch,
-} from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { TaskService } from './task.service';
-import { CreateTaskDto } from './dto/create-task.dto';
+import { GrpcMethod } from '@nestjs/microservices';
+import taskStub from '@buf/bneiconseil_iw4-ninja.grpc_node/task/v1alpha/task_pb';
 
-@Controller('task')
+@Controller()
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
-  @Post()
-  create(@Body() createTaskDto: CreateTaskDto) {
-    return this.taskService.create(createTaskDto);
-  }
+  @GrpcMethod('TaskService')
+  createTask(data: taskStub.CreateTaskRequest) {
+    const newTask = data.Task;
 
-  @Get()
-  findAll() {
-    return this.taskService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.taskService.findById(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() data: CreateTaskDto) {
-    return this.taskService.update(+id, data);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.taskService.remove(+id);
+    return this.taskService.create(newTask);
   }
 }
