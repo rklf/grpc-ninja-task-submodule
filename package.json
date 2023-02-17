@@ -33,6 +33,8 @@
     "@nestjs/microservices": "^9.3.9",
     "@nestjs/platform-express": "^9.0.0",
     "@prisma/client": "^4.10.1",
+    "@protobuf-ts/runtime": "^2.8.2",
+    "@protobuf-ts/runtime-rpc": "^2.8.2",
     "google-protobuf": "^3.21.2",
     "nest-winston": "^1.8.0",
     "prisma": "^4.10.1",
