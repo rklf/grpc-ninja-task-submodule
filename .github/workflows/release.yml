@@ -1,0 +1,25 @@
+name: Update version and changelog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.21.0
+
+      - name: install dependencies
+        run: pnpm install
+
+      - name: release-it Github Action
+        uses: TheRealWaldo/release-it@v0.7.2
+
+
