@@ -6,10 +6,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaService } from './prisma/prisma.service';
 import { TaskModule } from './task/task.module';
-
+import { ConfigModule } from '@nestjs/config';
+import Joi from 'joi';
 @Module({
   imports: [
     TaskModule,
+    ConfigModule.forRoot({
+      validationSchema: Joi.object({
+        NODE_ENV: Joi.string()
+          .valid('development', 'production', 'test', 'provision')
+          .default('development'),
+        PORT: Joi.number().default(5000),
+        DATABASE_URL: Joi.string().required(),
+      }),
+    }),
     WinstonModule.forRoot({
       format: winston.format.json(),
       defaultMeta: {
