@@ -11,9 +11,9 @@ message Task {
 }
 
 enum Status {
-  STATUS_TODO = 0;
-  STATUS_DOING = 1;
-  STATUS_DONE = 2;
+  todo = 0;
+  doing = 1;
+  done = 2;
 }
 
 // Generated according to https://cloud.google.com/apis/design/standard_methods
@@ -55,7 +55,7 @@ message ListTasksResponse {
 
 message GetTaskRequest {
   // The field will contain name of the resource requested.
-  string name = 1;
+  int32 id = 1;
 }
 
 message CreateTaskRequest {
@@ -81,5 +81,5 @@ message UpdateTaskRequest {
 
 message DeleteTaskRequest {
   // The resource name of the Task to be deleted.
-  string name = 1;
+  int32 id = 1;
 }

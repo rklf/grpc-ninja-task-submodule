@@ -2,9 +2,11 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  UseFilters,
 } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
 export class TaskService {
@@ -13,6 +15,14 @@ export class TaskService {
   create(createTaskDto: CreateTaskDto) {
     return this.prisma.task.create({
       data: createTaskDto,
+    }).catch((error) => {
+      if (error?.code === 'P2002') {
+        throw new RpcException({
+          code: 400,
+          message: `Task already exists (not unique)`,
+        });
+      }
+      throw new Error(error.message);
     });
   }
 
@@ -25,9 +35,11 @@ export class TaskService {
       where: { id },
     });
     if (!task) {
-      throw new NotFoundException('Task not found');
+      throw new RpcException({
+        code: 404,
+        message: `Task with id ${id} not found`,
+      })
     }
-
     return task;
   }
 
@@ -40,6 +52,12 @@ export class TaskService {
         data,
       });
     } catch (error) {
+      if (error?.code === 'P2025') {
+        throw new RpcException({
+          code: 400,
+          message: `Task with id ${id} not found`,
+        });
+      }
       throw new Error(error.message);
     }
   }

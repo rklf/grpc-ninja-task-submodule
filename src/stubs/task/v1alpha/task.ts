@@ -89,9 +89,9 @@ export interface GetTaskRequest {
     /**
      * The field will contain name of the resource requested.
      *
-     * @generated from protobuf field: string name = 1;
+     * @generated from protobuf field: int32 id = 1;
      */
-    name: string;
+    id: number;
 }
 /**
  * @generated from protobuf message task.v1alpha.CreateTaskRequest
@@ -135,26 +135,26 @@ export interface DeleteTaskRequest {
     /**
      * The resource name of the Task to be deleted.
      *
-     * @generated from protobuf field: string name = 1;
+     * @generated from protobuf field: int32 id = 1;
      */
-    name: string;
+    id: number;
 }
 /**
  * @generated from protobuf enum task.v1alpha.Status
  */
 export enum Status {
     /**
-     * @generated from protobuf enum value: STATUS_TODO = 0;
+     * @generated from protobuf enum value: todo = 0;
      */
-    TODO = 0,
+    todo = 0,
     /**
-     * @generated from protobuf enum value: STATUS_DOING = 1;
+     * @generated from protobuf enum value: doing = 1;
      */
-    DOING = 1,
+    doing = 1,
     /**
-     * @generated from protobuf enum value: STATUS_DONE = 2;
+     * @generated from protobuf enum value: done = 2;
      */
-    DONE = 2
+    done = 2
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class Task$Type extends MessageType<Task> {
@@ -164,7 +164,7 @@ class Task$Type extends MessageType<Task> {
             { no: 2, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "description", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "due_date", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "status", kind: "enum", T: () => ["task.v1alpha.Status", Status, "STATUS_"] }
+            { no: 5, name: "status", kind: "enum", T: () => ["task.v1alpha.Status", Status] }
         ]);
     }
     create(value?: PartialMessage<Task>): Task {
@@ -350,11 +350,11 @@ export const ListTasksResponse = new ListTasksResponse$Type();
 class GetTaskRequest$Type extends MessageType<GetTaskRequest> {
     constructor() {
         super("task.v1alpha.GetTaskRequest", [
-            { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "id", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
         ]);
     }
     create(value?: PartialMessage<GetTaskRequest>): GetTaskRequest {
-        const message = { name: "" };
+        const message = { id: 0 };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<GetTaskRequest>(this, message, value);
@@ -365,8 +365,8 @@ class GetTaskRequest$Type extends MessageType<GetTaskRequest> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string name */ 1:
-                    message.name = reader.string();
+                case /* int32 id */ 1:
+                    message.id = reader.int32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -380,9 +380,9 @@ class GetTaskRequest$Type extends MessageType<GetTaskRequest> {
         return message;
     }
     internalBinaryWrite(message: GetTaskRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string name = 1; */
-        if (message.name !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.name);
+        /* int32 id = 1; */
+        if (message.id !== 0)
+            writer.tag(1, WireType.Varint).int32(message.id);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -505,11 +505,11 @@ export const UpdateTaskRequest = new UpdateTaskRequest$Type();
 class DeleteTaskRequest$Type extends MessageType<DeleteTaskRequest> {
     constructor() {
         super("task.v1alpha.DeleteTaskRequest", [
-            { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "id", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
         ]);
     }
     create(value?: PartialMessage<DeleteTaskRequest>): DeleteTaskRequest {
-        const message = { name: "" };
+        const message = { id: 0 };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<DeleteTaskRequest>(this, message, value);
@@ -520,8 +520,8 @@ class DeleteTaskRequest$Type extends MessageType<DeleteTaskRequest> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string name */ 1:
-                    message.name = reader.string();
+                case /* int32 id */ 1:
+                    message.id = reader.int32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -535,9 +535,9 @@ class DeleteTaskRequest$Type extends MessageType<DeleteTaskRequest> {
         return message;
     }
     internalBinaryWrite(message: DeleteTaskRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string name = 1; */
-        if (message.name !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.name);
+        /* int32 id = 1; */
+        if (message.id !== 0)
+            writer.tag(1, WireType.Varint).int32(message.id);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
